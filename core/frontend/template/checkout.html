@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% block title %}Check Out{% endblock title %}
+{% block content %}
+<body >
+    <div class="flex flex-col py-4 mt-20 items-center border-bs sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+        <a class="text-2xl font-bold text-white">Check Out</a>
+        <div class="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
+            <div class="relative">
+                <ul class="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
+                    <li class="flex items-center space-x-3 text-left sm:space-x-4">
+                        <a class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200 text-xs font-semibold text-emerald-700" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </a>
+                        <span class="font-semibold text-white">Shop</span>
+                    </li>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <li class="flex items-center space-x-3 text-left sm:space-x-4">
+                        <a class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
+                        <span class="font-semibold text-gray-200">Shipping</span>
+                    </li>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <li class="flex items-center space-x-3 text-left sm:space-x-4">
+                        <a class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">3</a>
+                        <span class="font-semibold text-gray-400">Payment</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+        <div class="px-4 pt-8">
+            <p class="text-xl text-white font-medium">Order Summary</p>
+            <p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
+            <div class="mt-8 space-y-3 rounded-full border bg-gray-200 px-2 py-4 sm:px-6">
+                <div class="flex flex-col rounded-lg bg-white sm:flex-row">
+                    {% for item in items %}
+                    <div class='cart-row'>
+                        <img class="m-2 h-24 w-28 rounded-md border object-cover object-center" src="{{item.product.image.url}}" alt="" />
+                        <div class="flex w-full flex-col px-4 py-4">
+                            <span class="font-semibold">{{items.product.name}}</span>
+                            <span class="float-right text-gray-400">Rs. {{items.product.price}}</span>
+                            <div class="flex items-center quantity border-gray-100">
+                              <span class="cursor-pointer rounded-l bg-gray-700 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
+                              <input class="h-8 w-8 border quantity bg-gray-700 text-center text-xs outline-none" type="number" value="{{item.quantity}}" min="1" />
+                              <span class="cursor-pointer rounded-r bg-gray-700 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+            </div>
+        <div class=''>
+            <div class="m-8 grid gap-6">
+                <div class="mt-10 bg-gray-200 rounded-lg px-4 pt-8 lg:mt-0">
+                <p class="text-xl text-gray-800 font-medium">Payment Details</p>
+                <p class="text-gray-500">Complete your order by providing your payment details.</p>
+                <div class="">
+                    <label for="email" class="mt-4 mb-2 text-gray-800 block text-sm font-medium">Email</label>
+                    <div class="relative">
+                        <input type="text" required id="email" name="email" class="w-full rounded-md border border-gray-500 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" />
+                        <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <label for="card-holder" class="text-gray-800 mt-4 mb-2 block text-sm font-medium">Card Holder</label>
+                    <div class="relative">
+                        <input type="text" required id="card-holder" name="card-holder" class="w-full rounded-md border border-gray-500 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10bfocus:border-blue-500 focus:ring-blue-500" placeholder="Your full name here" />
+                        <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75 M15 12 h3.75 M15 15h3.75 M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.54.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <label for="card-no" class="mt-4 mb-2 block text-gray-800 text-sm font-medium">Payment Method</label>
+                        <div class="relative" >
+                            <input class="peer hidden" id="UPI" type="radio" name="radio" />
+                            <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                            <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="UPI"/>
+                                <div class="ml-5">
+                                    <span class="mt-2 font-semibold">UPI</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="peer hidden" id="COD" type="radio" name="radio"/>
+                            <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                            <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="COD"/>
+                                <div class="ml-5">
+                                    <span class="mt-2 font-semibold">Cash On Delivery</span>
+                                </div>
+                            </label>
+                        </div>
+                    <label for="billing-address" class="mt-4 mb-2 block text-sm text-gray-800 font-medium">Billing Address</label>
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="relative flex sm:w-7/12">
+                            <input type="textarea" required id="billing-address" name="address" class="w-full rounded-md border border-gray-500 px-4 py-3 text-sm shadow-sm outline-none focus:border-blue-500 focus:ring-blue-500" placeholder="Street Address" />
+                            <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                                <img class="h-4 w-4 object-contain" 
+                                src="https://flagpack.xyz/_nuxt/c829b6c0131de7162790d2f897a90fd.svg" alt="" />
+                            </div>
+                        </div>
+                        <br>
+                        <input type="text" required name="city" class="flex-shrink-0 rounded-md border border-gray-500 px-4 py-3 text-sm shadow-sm outline-none w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="City" />
+
+                        <input type="text" required name="state" class="flex-shrink-0 rounded-md border border-gray-500 px-4 py-3 text-sm shadow-sm outline-none w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="State" />
+
+                        <input type="text" required name="zipcode" class="flex-shrink-0 rounded-md border border-gray-500 px-4 py-3 text-sm shadow-sm outline-none w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="ZIP" />
+                    </div>
+                </div>
+            
+            
+                <!-- Total -->
+                <div class=" flex items-center justify-between">
+                    <p class="text-sm font-medium text-gray-900">Total</p>
+                    <p class="text-2xl font-semibold text-gray-900">{{order.get_cart_total}}</p>
+                </div><input>
+                <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white" type='submit'> Place Order </button></input>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR-CLIENT-ID&currency=USD&disable-funding=credit"></script>
+
+    <script>
+        var total = '{{order.get_cart_total}}'
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            style: {
+                color:  'blue',
+                shape:  'rect',
+            },
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value:parseFloat(total).toFixed(2)
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    submitFormData()
+                });
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+
+    <script type="text/javascript">
+        var shipping = '{{order.shipping}}'
+
+        if (shipping == 'False'){
+            document.getElementById('shipping-info').innerHTML = ''
+        }
+
+        if (user != 'AnonymousUser'){
+            document.getElementById('user-info').innerHTML = ''
+        }
+
+        if (shipping == 'False' && user != 'AnonymousUser'){
+            //Hide entire form if user is logged in and shipping is false
+                document.getElementById('form-wrapper').classList.add("hidden");
+                //Show payment if logged in user wants to buy an item that does not require shipping
+                document.getElementById('payment-info').classList.remove("hidden");
+        }
+
+        var form = document.getElementById('form')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            console.log('Form Submitted...')
+            document.getElementById('form-button').classList.add("hidden");
+            document.getElementById('payment-info').classList.remove("hidden");
+        })
+
+        /*
+        document.getElementById('make-payment').addEventListener('click', function(e){
+            submitFormData()
+        })
+        */
+
+        function submitFormData(){
+            console.log('Payment button clicked')
+
+            var userFormData = {
+                'name':null,
+                'email':null,
+                'total':total,
+            }
+
+            var shippingInfo = {
+                'address':null,
+                'city':null,
+                'state':null,
+                'zipcode':null,
+            }
+
+            if (shipping != 'False'){
+                shippingInfo.address = form.address.value
+                shippingInfo.city = form.city.value
+                shippingInfo.state = form.state.value
+                shippingInfo.zipcode = form.zipcode.value
+            }
+
+            if (user == 'AnonymousUser'){
+                userFormData.name = form.name.value
+                userFormData.email = form.email.value
+            }
+
+            console.log('Shipping Info:', shippingInfo)
+            console.log('User Info:', userFormData)
+
+            var url = "/process_order/"
+            fetch(url, {
+                method:'POST',
+                headers:{
+                    'Content-Type':'applicaiton/json',
+                    'X-CSRFToken':csrftoken,
+                }, 
+                body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+                
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                alert('Transaction completed');  
+
+                cart = {}
+                document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+                window.location.href = "/"
+
+                })
+        }
+    </script>
+</body>
+{% endblock content %}

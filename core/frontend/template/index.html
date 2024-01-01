@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}welcome {% endblock title %}
+{% block content %}
+
+<body>
+<div class="overflow-x-hidden mt-20">
+    <section class="relative pt-10 sm:py-16 lg:pt-20 xl:pb-0">
+      <div class=" shrink-0 bg-gradient-to-l from-purple-800 to-sky-800 absolute left-1/2 h-96 w-96 -translate-x-1/2 rounded-full border bg-gradient-to-br mt-6 "></div>
+      <div class="relative mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mx-auto backdrop-blur bg-white/10 sm:p-12 rounded-2xl max-w-3xl text-center">
+          <h1 class="mt-5 text-3xl font-light leading-snug text-white sm:text-5xl sm:leading-snug lg:text-6xl lg:leading-snug">
+            Make Moments Beautiful With <br class="sm:hidden" />
+            <span class="relative inline-flex justify-center whitespace-nowrap bg-gradient-to-l bg-clip-text text-transparent from-sky-600 via-cyan-400 from-20% to-pink-600 font-bold"> Elegant Design</span>
+          </h1>
+          <p class="mx-auto mt-10 max-w-md text-base leading-7 text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius deleniti perferendis magnam.</p>
+          <div class="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start">
+          </div>
+          <ul class="flex flex-col justify-between items-center text-white space-2 m-4 md:ml-auto md:flex-row md:space-y-0">
+              <li class="font-bold md:mx-12"><a href="/store/">Store</a></li>
+              <li class="md:mr-12"><a href="/wishlist/">Wishlist</a></li>
+              <li class="md:mr-12"><a href="/cart/">Cart</a></li>
+              <li class="md:mr-12"><a href="/contact/">Contact</a></li>
+              <li class="md:mr-12">
+                {% if request.user.is_authenticated %}
+                  <div class='rounded-full border-2 border-white px-6 py-1 text-white transition-colors hover:bg-gradient-to-l hover:bg-clip-text hover:text-transparent hover:from-sky-600 hover:via-cyan-400 hover:from-20% hover:to-pink-600 font-bold'>{{request.user}}</div>
+                  {% else %}
+                  <button class="rounded-full border-2 border-white px-6 py-1 text-white transition-colors hover:bg-gradient-to-l hover:bg-clip-text hover:text-transparent hover:from-sky-600 hover:via-cyan-400 hover:from-20% hover:to-pink-600 font-bold"><a href ="/login/"> Login</a></button>
+                {% endif %}
+              </li>
+            </ul>
+        </div>
+      </div>
+</section>
+
+
+  {% comment %} Advertisement {% endcomment %}
+  
+  <div class="  my-12 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div class="mb-6 flex items-end justify-between gap-16">
+      </div>
+      <div class="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+        {% comment %} <!—product – start -!> {% endcomment %}
+        {% for item in items %}
+        <div>
+          <a href="/store/{{item.slug}}" class="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 lg:mb-3">
+            <img src="{{item.image.url}}" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+            <span class="absolute left-0 top-0 rounded-br-lg bg-blue-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">{{item.category}}</span>
+          </a>
+
+          <div>
+            <a href="/store/{{item.slug}}" class="hover:text-gray-400 mb-1 text-white transition duration-100 lg:text-lg">{{item.name}}</a>
+
+            <div class="flex items-end gap-2">
+              <span class="font-bold text-white lg:text-lg">Rs. {{item.price}}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% comment %} <!—product – end -!> {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+{% endblock content %}

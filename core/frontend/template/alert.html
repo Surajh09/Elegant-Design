@@ -1,0 +1,15 @@
+{% comment %} ALERTS {% endcomment %}
+{% if messages %}
+    <div
+    class="p-3 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
+    role="alert"
+    >
+        <ul span="font-medium">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+            {{message}}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

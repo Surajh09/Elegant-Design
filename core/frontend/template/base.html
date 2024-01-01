@@ -1,0 +1,113 @@
+<head><script src="https://cdn.tailwindcss.com"></script></head>
+<title>{% block title %} {%endblock%} | Elegant Design</title>
+{% load static %}
+
+<head>
+
+
+<div class="overflow-x-hidden relative bg-gray-800 ">
+  <nav class='bg-gradient-to-t from-purple-800/90 from-20% to-blue-600/50 backdrop-blur-sm shadow-lg shadow-indigo-500 fixed w-full z-50 top-0'>
+    <div class=" flex max-w-screen-xl flex-col overflow-hidden px-4 py-4  text-gray-200 md:mx-auto md:flex-row md:items-center">
+      <h3 class="flex cursor-pointer items-center whitespace-nowrap text-2xl font-black text-white">
+      <span class="mr-2 text-4xl">
+      </span> <a href="/" />
+      Elegant Design
+    </h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+    <div class="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start">
+      <ul class="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
+        <li class="font-bold md:mr-12"><a href="/store/">Store</a></li>
+        <li class="md:mr-12"><a href="/checkout/">Check Out</a></li>
+        <li class="md:mr-12"><a href="/cart/">Cart</a></li>
+        <li class="md:mr-12"><a href="/contact/">Contact</a></li>
+        <li class="md:mr-12">
+          {% if request.user.is_authenticated %}
+          <div class='rounded-full border-2 border-white px-6 py-1 text-white transition-colors hover:bg-gradient-to-l hover:bg-clip-text hover:text-transparent hover:from-sky-600 hover:via-cyan-400 hover:from-20% hover:to-pink-600 font-bold'>{{request.user}}
+          {% else %}
+          <button class="rounded-full border-2 border-white px-6 py-1 text-white transition-colors hover:bg-gradient-to-l hover:bg-clip-text hover:text-transparent hover:from-sky-600 hover:via-cyan-400 hover:from-20% hover:to-pink-600 font-bold"><a href ="/login/"> Login</a></button>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </nav>
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+
+<link rel="stylesheet" href="{%static "css/style.css"%}">  
+<script type="text/javascript">
+  var user = '{{request.user}}'
+
+  function getToken(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  var csrftoken = getToken('csrftoken')
+
+  function getCookie(name) {
+      // Split cookie string and get all individual name=value pairs in an array
+      var cookieArr = document.cookie.split(";");
+
+      // Loop through the array elements
+      for(var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+
+          /* Removing whitespace at the beginning of the cookie name
+          and compare it with the given string */
+          if(name == cookiePair[0].trim()) {
+              // Decode the cookie value and return
+              return decodeURIComponent(cookiePair[1]);
+          }
+      }
+
+      // Return null if not found
+      return null;
+  }
+  var cart = JSON.parse(getCookie('cart'))
+
+  if (cart == undefined){
+    cart = {}
+    console.log('Cart Created!', cart)
+    document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+  }
+  console.log('Cart:', cart)
+</script>
+</head>
+{% block content %}
+
+
+{% endblock content %}
+{% comment %} FOOTER {% endcomment %}
+<div class="bg-gray-800">
+  <footer class="overflow-x-hidden bg-gray-800" >
+  <div class="bg-indigo-700 py-6">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div class="flex flex-col items-center justify-between gap-2 md:flex-row">
+        <div class="mb-3 text-center md:mb-0 md:text-left">
+          <span class="font-bold uppercase tracking-widest text-gray-100">Newsletter</span>
+          <p class="text-indigo-200">Subscribe to our newsletter</p>
+        </div>
+        {% csrf_token %}
+        <form class="flex w-full gap-2 p-6 md:max-w-md">
+          <input placeholder="Email" class="w-full flex-1 rounded border border-white bg-gray-400 px-3 py-2 text-white placeholder-indigo-100 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+
+          <button class="inline-block rounded bg-white px-8 py-2 text-center text-sm font-semibold text-indigo-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:text-indigo-600 md:text-base">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src={%static "/js/cart.js"%}></script>
+  <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
+</footer>

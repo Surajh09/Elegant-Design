@@ -63,7 +63,7 @@ terminado
 tinycss2
 tornado
 traitlets
-tkinkter
+tkinter
 types-python-dateutil
 typing_extensions
 tzdata

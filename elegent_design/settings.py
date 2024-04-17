@@ -1,4 +1,4 @@
-import dj_database_url
+
 import os
 from pathlib import Path
 
@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "true"
 
-ALLOWED_HOSTS = ["elegant-design.onrender.com"]
+ALLOWED_HOSTS = ["elegant-design-surajh09.onrender.com", "localhost"]
 
 
 # Application definition
@@ -72,9 +72,9 @@ DATABASES = {
     }
 }
 
-database_url= os.environ.get("DATABASE_URL")
 
-DATABASES["default"]= dj_database_url.parse(database_url)
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
